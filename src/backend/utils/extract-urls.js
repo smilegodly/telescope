@@ -6,5 +6,8 @@ const getUrls = require('get-urls');
 exports.extract = function(htmlData) {
   const urls = getUrls(htmlData);
   const arrayOfUrls = Array.from(urls);
+  if (arrayOfUrls.length === 0) {
+    return null;
+  }
   return arrayOfUrls;
 };
