@@ -5,11 +5,8 @@ module.exports = function (dom) {
     return null;
   }
 
-  let fixedTitle = [];
   dom.window.document.querySelectorAll('h1.MuiTypography-h1').forEach((h1Tag) => {
     h1Tag.title = entities.decodeHTML(h1Tag.title);
-    fixedTitle.push(h1Tag.title);
+    h1Tag.innerHTML = h1Tag.title;
   });
-
-  return fixedTitle; // return array of titles
 };
