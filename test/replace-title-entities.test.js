@@ -1,39 +1,42 @@
 const toDOM = require('../src/backend/utils/html/dom');
 const replaceEntityInTitle = require('../src/backend/utils/html/replace-title-entities');
 
-function replaceEntityInTitle(title) {
+function decodeTitles(title) {
   const dom = toDOM(title);
+  replaceEntityInTitle(dom);
   return dom.window.document.querySelectorAll('h1.MuiTypography-h1');
 }
 
-test('No html entities in title should not be changed', () => {
-  const original = '<h1> Hello World </h1>';
-  const data = replaceEntityInTitle(original);
-  expect(data[0].innerText).toBe(original);
+test('No html entities in title, title should not be changed', () => {
+  const original =
+    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World </h1>';
+  const data = decodeTitles(original);
+  expect(data[0].outerHTML).toBe(original);
 });
 
-test('The value returned by replaceEntityInTitle() is of type object', () => {
-  const original = '<h1> Hello World </h1>';
-  const data = replaceEntityInTitle(original);
+test('The value returned by decodeTitles() is of type object', () => {
+  const original =
+    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World </h1>';
+  const data = decodeTitles(original);
   expect(typeof data).toBe('object');
 });
 
-test('Ampersand html entities from the title should be decoded', () => {
-  const x = '';
-  //
-});
+// test('Ampersand html entities from the title should be decoded', () => {
+//   const x = '';
+//   //
+// });
 
-test('Greater than html entities from the title should be decoded', () => {
-  const x = '';
-  //
-});
+// test('Greater than html entities from the title should be decoded', () => {
+//   const x = '';
+//   //
+// });
 
-test('Less than html entities from the title should be decoded', () => {
-  const x = '';
-  //
-});
+// test('Less than html entities from the title should be decoded', () => {
+//   const x = '';
+//   //
+// });
 
-test('Multiple elements should be decoded', () => {
-  const x = '';
-  //
-});
+// test('Multiple titles should be decoded', () => {
+//   const x = '';
+//   //
+// });
