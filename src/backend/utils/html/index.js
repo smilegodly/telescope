@@ -3,6 +3,7 @@ const fixIFrameWidth = require('./fix-iframe-width');
 const lazyLoad = require('./lazy-load');
 const syntaxHighlight = require('./syntax-highlight');
 const replaceCodeEntities = require('./replace-entities');
+const replaceTitleEntities = require('./replace-title-entities');
 const toDOM = require('./dom');
 
 /**
@@ -29,6 +30,8 @@ module.exports = function process(html) {
   lazyLoad(dom);
   // Replace <code> elements with encoded entities to use characters
   replaceCodeEntities(dom);
+  // Replace double encoding inside <h1> elements with single encoded entities
+  replaceTitleEntities(dom);
 
   // Return the resulting HTML
   return dom.window.document.body.innerHTML;
