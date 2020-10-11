@@ -7,11 +7,9 @@ function decodeTitles(title) {
   return dom.window.document.querySelectorAll('h1.MuiTypography-h1');
 }
 
-// "<h1 class=\"MuiTypography-root jss26 MuiTypography-h1\" title=\"About Myself &amp;amp; Why I Chose This Course\" id=\"66f0fd529b\">About Myself &amp;amp; Why I Chose This Course</h1>"
-
 test('No html entities in title, title should not be changed', () => {
   const original =
-    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World </h1>';
+    '<h1 class="MuiTypography-root jss26 MuiTypography-h1" title="About Myself &amp; Why I Chose This Course" id="66f0fd529b">About Myself &amp; Why I Chose This Course</h1>';
   const data = decodeTitles(original);
   expect(data[0].outerHTML).toBe(original);
 });
@@ -34,18 +32,18 @@ test('Double encoded ampersand html entities should be properly singly encoded',
 
 test('Double encoded greater than html entities from the title should be singly encoded', () => {
   const original =
-    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World &amp;gt; Hello World </h1>';
+    '<h1 class="MuiTypography-root jss26 MuiTypography-h1" title="About Myself &amp;gt; Why I Chose This Course" id="66f0fd529b">About Myself &amp;gt; Why I Chose This Course</h1>';
   const properEncoding =
-    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World &gt; Hello World </h1>';
+    '<h1 class="MuiTypography-root jss26 MuiTypography-h1" title="About Myself > Why I Chose This Course" id="66f0fd529b">About Myself &gt; Why I Chose This Course</h1>';
   const data = decodeTitles(original);
   expect(data[0].outerHTML).toBe(properEncoding);
 });
 
 test('Double encoded less than html entities from the title should be singly encoded', () => {
   const original =
-    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World &amp;lt; Hello World </h1>';
+    '<h1 class="MuiTypography-root jss26 MuiTypography-h1" title="About Myself &amp;lt; Why I Chose This Course" id="66f0fd529b">About Myself &amp;lt; Why I Chose This Course</h1>';
   const properEncoding =
-    '<h1 class="MuiTypography-root jss290 MuiTypography-h1" title="Hello World"> Hello World &lt; Hello World </h1>';
+    '<h1 class="MuiTypography-root jss26 MuiTypography-h1" title="About Myself < Why I Chose This Course" id="66f0fd529b">About Myself &lt; Why I Chose This Course</h1>';
   const data = decodeTitles(original);
   expect(data[0].outerHTML).toBe(properEncoding);
 });
