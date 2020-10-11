@@ -10,8 +10,10 @@ module.exports = function (dom) {
   if (!(dom && dom.window && dom.window.document)) {
     return;
   }
+  let fixedTitle = {};
 
   dom.window.document.querySelectorAll('h1.MuiTypography-h1').forEach((h1Tag) => {
-    h1Tag.outerHTML = decode(h1Tag.outerHTML);
+    fixedTitle = decode(h1Tag.outerHTML);
+    h1Tag.outerHTML = fixedTitle;
   });
 };
