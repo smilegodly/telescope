@@ -15,13 +15,8 @@ module.exports = function (dom) {
 
   dom.window.document.querySelectorAll('h1').forEach((h1Tag) => {
     fixedTitle = decode(h1Tag);
-
-    // set innerhtml
-    h1Tag.innerHTML = fixedTitle;
-
-    // set title
-    h1Tag.title = fixedTitle;
-
     console.log(fixedTitle);
+    h1Tag.innerHTML = fixedTitle;
+    h1Tag.title = fixedTitle;
   });
 };
