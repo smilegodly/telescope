@@ -5,6 +5,7 @@ const lazyLoad = require('./lazy-load');
 const syntaxHighlight = require('./syntax-highlight');
 const replaceCodeEntities = require('./replace-entities');
 const fixEmptyPre = require('./modify-pre');
+const collapsePre = require('./collapse-pre');
 const toDOM = require('./dom');
 
 const { JSDOM } = jsdom;
@@ -32,6 +33,8 @@ module.exports = function process(html) {
   // Create a document we can process
   const dom = toDOM(clean);
 
+  // collapse more than one <pre> into one
+  collapsePre(dom);
   // Insert <code> elements into empty <pre>
   fixEmptyPre(dom);
   // Look for and syntax highlight <pre><code>...</code></pre> blocks
